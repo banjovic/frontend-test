@@ -14,13 +14,11 @@ export const baseQuery = fetchBaseQuery({
     responseHandler: async (response: any) => {
         try {
             if (response.status === 401 || response.status === 403) {
-                const data = await response.json();
-                console.log(data, "data.message");
+                await response.json();
             }
             // Return the serialized data instead of the whole Response object
             return response.ok ? await response.json() : Promise.reject(response);
         } catch (error) {
-            console.error("Error parsing response JSON:", error);
             // Handle the error as necessary
             throw error;
         }
