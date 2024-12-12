@@ -23,12 +23,11 @@ export default function GlobalError({
               <Button
                 variant='contained'
                 sx={{
-                  background: "#0f172a",
-                  textTransform: "none",
                   fontSize: "18px",
                 }}
                 onClick={() => reset()}
                 fullWidth
+                color='primary'
               >
                 Try again
               </Button>

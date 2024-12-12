@@ -16,11 +16,10 @@ export default function NotFound() {
         <Button
           variant='contained'
           sx={{
-            background: "#0f172a",
-            textTransform: "none",
             fontSize: "18px",
           }}
           onClick={() => router.back()}
+          color='primary'
           fullWidth
         >
           Go back
