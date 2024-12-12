@@ -11,6 +11,7 @@ import {
   InputAdornment,
   IconButton,
   FormControl,
+  CircularProgress,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import toast from "react-hot-toast";
@@ -301,7 +302,7 @@ const SignupPage = () => {
             fullWidth
             disabled={isLoading}
           >
-            Create an account
+            {isLoading ? <CircularProgress size={24} /> : "Create an account"}
           </Button>
 
           <Typography variant='body2' textAlign='center'>
