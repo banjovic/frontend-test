@@ -23,9 +23,7 @@ type FormValueType = {
   organization_name: string;
 };
 
-type Props = {};
-
-const SignupPage = (props: Props) => {
+const SignupPage = () => {
   const [formValues, setFormValues] = useState<FormValueType>({
     first_name: "",
     last_name: "",
@@ -281,7 +279,7 @@ const SignupPage = (props: Props) => {
           </Box>
 
           <Button variant='contained' color='primary' fullWidth>
-          Create an account
+            Create an account
           </Button>
 
           <Typography variant='body2' textAlign='center'>

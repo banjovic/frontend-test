@@ -8,9 +8,7 @@ type FormValueType = {
   password: string;
 };
 
-type Props = {};
-
-const LoginPage = (props: Props) => {
+const LoginPage = () => {
   const router = useRouter();
 
   const [formValues, setFormValues] = useState<FormValueType>({

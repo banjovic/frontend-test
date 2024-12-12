@@ -2,9 +2,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-type Props = {};
-
-const DashboardPage = (props: Props) => {
+const DashboardPage = () => {
   return (
     <Box width='100%' height='100vh'>
       <Box
