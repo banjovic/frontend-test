@@ -1,7 +1,20 @@
 "use client";
-import React, { useState } from "react";
-import { Button, Box, Typography, Link, TextField, Stack } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  Box,
+  Typography,
+  Link,
+  TextField,
+  Stack,
+  CircularProgress,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+
+import { useLoginMutation } from "@/redux/auth/AuthService";
+import { setUserCredentials } from "@/redux/auth/AuthSlice";
 
 type FormValueType = {
   email: string;
@@ -10,6 +23,9 @@ type FormValueType = {
 
 const LoginPage = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const [login, { isLoading, data, error }] = useLoginMutation();
 
   const [formValues, setFormValues] = useState<FormValueType>({
     email: "",
@@ -24,10 +40,26 @@ const LoginPage = () => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log("Form Submitted", formValues);
-    router.push("/dashboard");
+
+    try {
+      await login(formValues);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+      toast.error(error);
+    }
   };
+
+  useEffect(() => {
+    if (data && data.data.id) {
+      toast.success(data.message);
+      dispatch(setUserCredentials(data));
+
+      router.push(`/dashboard?user_id=${data.data.id}`);
+    }
+  }, [data]);
 
   return (
     <Box
@@ -73,8 +105,7 @@ const LoginPage = () => {
 
           <Stack gap={1}>
             <Typography
-              // variant='subtitle1'
-              fontSize={18}
+              variant='subtitle1'
               sx={{ fontFamily: "var(--font-inter)" }}
               fontWeight={500}
             >
@@ -98,8 +129,7 @@ const LoginPage = () => {
               alignItems='center'
             >
               <Typography
-                // variant='subtitle1'
-                fontSize={18}
+                variant='subtitle1'
                 sx={{ fontFamily: "var(--font-inter)" }}
                 fontWeight={500}
               >
@@ -124,13 +154,24 @@ const LoginPage = () => {
             />
           </Stack>
 
-          <Button
+          {/* <Button
             variant='contained'
             color='primary'
             fullWidth
             onClick={handleSubmit}
+            isLoading={isLoading}
+            isDisabled={isLoading}
           >
             Login
+          </Button> */}
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            fullWidth
+            disabled={isLoading}
+          >
+            {isLoading ? <CircularProgress size={24} /> : "Login"}
           </Button>
           <Button variant='outlined' fullWidth>
             Login with Google

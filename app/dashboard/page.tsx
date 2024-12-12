@@ -1,8 +1,48 @@
 "use client";
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+
+import { useGetUserQuery } from "@/redux/auth/AuthService";
+import { User } from "@/types/types";
 
 const DashboardPage = () => {
+  const params = useParams();
+  console.log("params", params);
+
+  const [userDetails, setUserDetails] = useState<User>();
+
+  const { data, error, isLoading, isFetching } = useGetUserQuery(
+    {
+      user_id: params?.user_id as string,
+    },
+    { skip: !!userDetails }
+  );
+  console.log("data", data);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("jointly-userDetails");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUserDetails(parsedUser);
+    }
+  }, []);
+
+  if (isLoading || isFetching) {
+    return (
+      <div className='p-8'>
+        Loading
+        {/* <div className='w-full h-16 flex items-center justify-center mt-40'>
+            <LottieLoader animationData={LoadingAnimation} className='w-1/6' />
+          </div> */}
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className='px-8'>Error fetching user data. Try again</div>;
+  }
+
   return (
     <Box width='100%' height='100vh'>
       <Box

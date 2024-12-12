@@ -1,12 +1,31 @@
-export type RegisterPayloadType = {
-    password: string,
-    confirmPassword: string,
+export interface User {
+    id: string,
     email: string,
-    heardAboutUs: string
+    active: boolean,
+    is_verified: boolean,
+    user_type: string,
+    created_at: string,
+    updated_at: string,
+    organization_name: string
+    phone_number: string,
+    first_name: string
+    last_name: string
+    is_completed_kyc: boolean
+    password?: string,
+}
+export type SignupPayloadType = {
+    password: string,
+    first_name: string
+    last_name: string
+    phone_number: string,
+    email: string,
+    organization_name: string
 }
 
-export type RegisterResponseType = {
+export type SignupResponseType = {
+    success: boolean,
     message: string,
+    data: User
 }
 
 export type LoginPayloadType = {
@@ -14,54 +33,9 @@ export type LoginPayloadType = {
     password: string,
 }
 
-export type ResendPayloadType = {
-    email: string,
-}
-
-export type ResendResponseType = {
-    message: string,
-    status: boolean,
-}
-
-export type OnboardingResponseType = {
-    message: string,
-    status: boolean,
-    onboardingStage: number
-}
-
-export type ResetPasswordPayloadType = {
-    newPassword: string,
-    token: string | null,
-    userId: string | null,
-}
-
-export interface ResponseWithUser {
-    message: string,
-    success: boolean,
-    user: User
-}
-
-export interface User {
-    _id: string,
-    name: string,
-    email: string,
-    heardAboutUs: string,
-    verified: boolean,
-    avatar: string,
-    country: string,
-    createdAt: string,
-    updatedAt: string,
-    __v: number,
-    address: string,
-    dateOfBirth: string,
-    isOnboarded: boolean,
-    role: string,
-    onboardingStage: number,
-    phoneNumber: number,
-}
-
 export type LoginResponseType = {
+    success: boolean,
     message: string,
     token: string,
-    user: User
+    data: User
 }

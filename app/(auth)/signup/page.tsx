@@ -119,8 +119,7 @@ const SignupPage = () => {
             >
               <Stack gap={1} width={{ base: "100%", md: "50%" }}>
                 <Typography
-                  // variant='subtitle1'
-                  fontSize={18}
+                  variant='subtitle1'
                   sx={{ fontFamily: "var(--font-inter)" }}
                   fontWeight={500}
                 >
@@ -139,8 +138,7 @@ const SignupPage = () => {
 
               <Stack gap={1} width={{ base: "100%", md: "50%" }}>
                 <Typography
-                  // variant='subtitle1'
-                  fontSize={18}
+                  variant='subtitle1'
                   sx={{ fontFamily: "var(--font-inter)" }}
                   fontWeight={500}
                 >
@@ -160,8 +158,7 @@ const SignupPage = () => {
 
             <Stack gap={1}>
               <Typography
-                // variant='subtitle1'
-                fontSize={18}
+                variant='subtitle1'
                 sx={{ fontFamily: "var(--font-inter)" }}
                 fontWeight={500}
               >
@@ -180,8 +177,7 @@ const SignupPage = () => {
 
             <Stack gap={1}>
               <Typography
-                // variant='subtitle1'
-                fontSize={18}
+                variant='subtitle1'
                 sx={{ fontFamily: "var(--font-inter)" }}
                 fontWeight={500}
               >
@@ -207,8 +203,7 @@ const SignupPage = () => {
 
             <Stack gap={1}>
               <Typography
-                // variant='subtitle1'
-                fontSize={18}
+                variant='subtitle1'
                 sx={{ fontFamily: "var(--font-inter)" }}
                 fontWeight={500}
               >
@@ -232,8 +227,7 @@ const SignupPage = () => {
                 alignItems='center'
               >
                 <Typography
-                  // variant='subtitle1'
-                  fontSize={18}
+                  variant='subtitle1'
                   sx={{ fontFamily: "var(--font-inter)" }}
                   fontWeight={500}
                 >
