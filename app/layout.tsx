@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import theme from "@/theme";
 import StoreProvider from "./StoreProvider";
+import ToastProvider from "@/providers/toast-provider";
 
 const publicSans = Public_Sans({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${publicSans.variable} ${inter.variable} antialiased`}>
         <StoreProvider>
+          <ToastProvider />
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>{children}</ThemeProvider>
           </AppRouterCacheProvider>

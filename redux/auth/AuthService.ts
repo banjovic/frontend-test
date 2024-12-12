@@ -7,7 +7,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         signup: builder.mutation<SignupResponseType, SignupPayloadType>({
             query: (payload) => ({
-                url: '/account/:platform',
+                url: '/account/web',
                 method: "POST",
                 headers: {
                     'content-type': 'application/json',
@@ -21,12 +21,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 }
                 else if (err.status === 401) {
                     toast.error(err.data.message);
-                    localStorage.removeItem('frontend-interview');
+                    localStorage.removeItem('frontend-interview-token');
                     // window.location.replace("/");
                 }
                 else if (err.status === 403) {
                     toast.error(err.data.message);
-                    localStorage.removeItem('frontend-interview');
+                    localStorage.removeItem('frontend-interview-token');
                     // window.location.replace("/");
                 } else toast.error(err.data.message);
                 return err;
@@ -53,35 +53,18 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 }
                 else if (err.status === 401) {
                     toast.error(err.data.message);
-                    localStorage.removeItem('frontend-interview');
+                    localStorage.removeItem('frontend-interview-token');
                     // window.location.replace("/");
                 }
                 else if (err.status === 403) {
                     toast.error(err.data.message);
-                    localStorage.removeItem('frontend-interview');
+                    localStorage.removeItem('frontend-interview-token');
                     // window.location.replace("/");
                 } else toast.error(err.data.message);
                 return err;
             }
         }),
-        getUser: builder.query<SignupResponseType, { user_id: string }>({
-            query: ({ user_id }) => ({ url: `/account/${user_id}`, method: "GET" }),
-            transformErrorResponse: (err: any) => {
-                if (err.status === "FETCH_ERROR") {
-                    toast.error("Network Error");
-                }
-                if (err.status === 404 && !err?.data?.statusMessage) {
-                    toast.error(err.data.message);
-                } else if (err.status === 500) {
-                    toast.error(err.data.message);
-                } else if (err.status === 401) {
-                    toast.error(err.data.message);
-                    localStorage.removeItem("jointly-adminToken");
-                    window.location.replace("/");
-                } else toast.error(err.data.message);
-                return err;
-            },
-        }),
+
         protected: builder.mutation<{ message: string }, void>({
             query: () => 'protected',
         }),
@@ -90,6 +73,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useSignupMutation,
-    useLoginMutation, useGetUserQuery,
+    useLoginMutation,
     useProtectedMutation
 } = authApiSlice

@@ -4,7 +4,7 @@ const baseQuery = fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
     prepareHeaders: (headers) => {
         if (typeof window !== 'undefined') {
-            const token = localStorage.getItem("frontend-interview");
+            const token = localStorage.getItem("frontend-interview-token");
             if (token) {
                 headers.set('authorization', `Bearer ${token}`);
             }

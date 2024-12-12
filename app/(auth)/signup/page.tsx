@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Box,
@@ -13,6 +13,10 @@ import {
   FormControl,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
+import { useSignupMutation } from "@/redux/auth/AuthService";
 
 type FormValueType = {
   first_name: string;
@@ -24,6 +28,10 @@ type FormValueType = {
 };
 
 const SignupPage = () => {
+  const router = useRouter();
+
+  const [signup, { isLoading, data, error }] = useSignupMutation();
+
   const [formValues, setFormValues] = useState<FormValueType>({
     first_name: "",
     last_name: "",
@@ -56,10 +64,24 @@ const SignupPage = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form Submitted", formValues);
+
+    try {
+      await signup(formValues);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+      toast.error(error);
+    }
   };
+
+  useEffect(() => {
+    if (data && data.data.id) {
+      toast.success(data.message);
+
+      router.push(`/dashboard?user_id=${data.data.id}`);
+    }
+  }, [data]);
 
   return (
     <Box
@@ -73,7 +95,7 @@ const SignupPage = () => {
       }}
     >
       <Box
-        width={{ base: "60%", md: 520 }}
+        width={{ xs: "80%", md: 520 }}
         height={{ md: 500, xl: "100%" }}
         sx={{ overflowY: "auto" }}
         paddingX={2}
@@ -130,7 +152,7 @@ const SignupPage = () => {
                   label=''
                   placeholder='Max'
                   variant='outlined'
-                  name='text'
+                  name='first_name'
                   value={formValues.first_name}
                   onChange={handleChange}
                 />
@@ -149,7 +171,7 @@ const SignupPage = () => {
                   label=''
                   placeholder='Min'
                   variant='outlined'
-                  name='text'
+                  name='last_name'
                   value={formValues.last_name}
                   onChange={handleChange}
                 />
@@ -195,7 +217,7 @@ const SignupPage = () => {
                     ),
                   },
                 }}
-                name='text'
+                name='phone_number'
                 value={formValues.phone_number}
                 onChange={handleChange}
               />
@@ -214,7 +236,7 @@ const SignupPage = () => {
                 label=''
                 placeholder=''
                 variant='outlined'
-                name='text'
+                name='organization_name'
                 value={formValues.organization_name}
                 onChange={handleChange}
               />
@@ -272,7 +294,13 @@ const SignupPage = () => {
             </Stack>
           </Box>
 
-          <Button variant='contained' color='primary' fullWidth>
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            fullWidth
+            disabled={isLoading}
+          >
             Create an account
           </Button>
 
