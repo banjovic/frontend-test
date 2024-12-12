@@ -67,21 +67,9 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         <Box alignItems='start' display='flex' flexDirection='column' gap={2}>
           <Stack alignItems='start' gap={1}>
             <AvatarGroup spacing='medium'>
-              <Avatar
-                alt='Remy Sharp'
-                src='/avatar.jpeg'
-                // sx={{ width: 24, height: 24 }}
-              />
-              <Avatar
-                alt='Travis Howard'
-                src='/avatar.jpeg'
-                // sx={{ width: 24, height: 24 }}
-              />
-              <Avatar
-                alt='Cindy Baker'
-                src='/avatar.jpeg'
-                // sx={{ width: 24, height: 24 }}
-              />
+              <Avatar alt='Remy Sharp' src='/avatar.jpeg' />
+              <Avatar alt='Travis Howard' src='/avatar.jpeg' />
+              <Avatar alt='Cindy Baker' src='/avatar.jpeg' />
             </AvatarGroup>
 
             <Typography
