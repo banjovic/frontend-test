@@ -1,8 +1,8 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { Box, Typography } from "@mui/material";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { User } from "@/types/types";
 import DashboardSkeleton from "@/components/DashboardSkeleton";
@@ -19,7 +19,7 @@ const DashboardPage = () => {
 
   const { data, error, isLoading, isFetching } = useGetUserQuery(
     { user_id: user_id as string },
-    { skip: !user_id || !userDetails }
+    { skip: !user_id }
   );
   console.log("data", data);
 
