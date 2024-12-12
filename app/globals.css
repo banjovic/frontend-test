@@ -30,3 +30,11 @@ body {
 .font-inter {
   font-family: var(--font-inter);
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #e2e8f0 inset !important;
+  -webkit-text-fill-color: var(--foreground) !important;
+}
