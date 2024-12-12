@@ -122,7 +122,6 @@ const DashboardPageContent = () => {
   );
 };
 
-// export default DashboardPage;
 export default function DashboardPage() {
   return (
     <Suspense fallback={<DashboardSkeleton />}>
