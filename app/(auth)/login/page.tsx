@@ -42,7 +42,6 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form Submitted", formValues);
 
     try {
       await login(formValues);
@@ -72,7 +71,7 @@ const LoginPage = () => {
         width: "100%",
       }}
     >
-      <Box width={{ base: "60%", md: 520 }}>
+      <Box width={{ xs: "80%", md: 520 }}>
         <form
           onSubmit={handleSubmit}
           style={{
@@ -127,6 +126,8 @@ const LoginPage = () => {
               display='flex'
               justifyContent='space-between'
               alignItems='center'
+              gap={1}
+              width='100%'
             >
               <Typography
                 variant='subtitle1'
@@ -135,10 +136,12 @@ const LoginPage = () => {
               >
                 Password
               </Typography>
+
               <Typography
                 variant='body2'
                 sx={{ fontFamily: "var(--font-inter)" }}
                 fontWeight={500}
+                textAlign='end'
               >
                 <Link href='#'>Forgot your password?</Link>
               </Typography>
@@ -154,22 +157,12 @@ const LoginPage = () => {
             />
           </Stack>
 
-          {/* <Button
-            variant='contained'
-            color='primary'
-            fullWidth
-            onClick={handleSubmit}
-            isLoading={isLoading}
-            isDisabled={isLoading}
-          >
-            Login
-          </Button> */}
           <Button
             type='submit'
             variant='contained'
             color='primary'
             fullWidth
-            disabled={isLoading}
+            disabled={isLoading || !formValues.email || !formValues.password}
           >
             {isLoading ? <CircularProgress size={24} /> : "Login"}
           </Button>

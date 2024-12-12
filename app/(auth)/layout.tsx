@@ -34,21 +34,24 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           color: "white",
           fontFamily: "var(--font-public-sans)",
         }}
-        display='flex'
+        display={{ xs: "none", md: "flex" }}
         flexDirection='column'
         justifyContent='space-between'
         gap={4}
         borderRadius={3}
         px={4}
-        pt={{ base: 10, md: 16, xl: 24 }}
-        pb={{ base: 4, md: 8 }}
+        pt={{ xs: 10, md: 16, xl: 24 }}
+        pb={{ xs: 4, md: 8 }}
       >
         <Stack>
           <Typography
             variant='h3'
             gutterBottom
             fontWeight={700}
-            sx={{ fontFamily: "var(--font-public-sans)" }}
+            sx={{
+              fontFamily: "var(--font-public-sans)",
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+            }}
           >
             Transform your potential today.
           </Typography>
@@ -64,9 +67,21 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         <Box alignItems='start' display='flex' flexDirection='column' gap={2}>
           <Stack alignItems='start' gap={1}>
             <AvatarGroup spacing='medium'>
-              <Avatar alt='Remy Sharp' src='/avatar.jpeg' />
-              <Avatar alt='Travis Howard' src='/avatar.jpeg' />
-              <Avatar alt='Cindy Baker' src='/avatar.jpeg' />
+              <Avatar
+                alt='Remy Sharp'
+                src='/avatar.jpeg'
+                // sx={{ width: 24, height: 24 }}
+              />
+              <Avatar
+                alt='Travis Howard'
+                src='/avatar.jpeg'
+                // sx={{ width: 24, height: 24 }}
+              />
+              <Avatar
+                alt='Cindy Baker'
+                src='/avatar.jpeg'
+                // sx={{ width: 24, height: 24 }}
+              />
             </AvatarGroup>
 
             <Typography
@@ -99,6 +114,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           </List>
         </Box>
       </Box>
+
       <Box sx={{ flexGrow: 1 }}>{children}</Box>
     </Box>
   );

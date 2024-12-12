@@ -1,46 +1,63 @@
 "use client";
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-import { useGetUserQuery } from "@/redux/auth/AuthService";
 import { User } from "@/types/types";
+import DashboardSkeleton from "@/components/DashboardSkeleton";
+import { useGetUserQuery } from "@/redux/dashboard/DashboardService";
+import toast from "react-hot-toast";
 
 const DashboardPage = () => {
-  const params = useParams();
-  console.log("params", params);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const user_id = searchParams.get("user_id");
+  console.log("user_id", user_id);
 
   const [userDetails, setUserDetails] = useState<User>();
+  console.log("userDetails", userDetails);
 
   const { data, error, isLoading, isFetching } = useGetUserQuery(
-    {
-      user_id: params?.user_id as string,
-    },
-    { skip: !!userDetails }
+    { user_id: user_id as string },
+    { skip: !user_id || !userDetails }
   );
   console.log("data", data);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("jointly-userDetails");
+    const token = localStorage.getItem("frontend-interview-token");
+    if (!token) {
+      toast.success("Kindly log in again");
+      router.push("/login");
+    }
+
+    const storedUser = localStorage.getItem("frontend-interview-user");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       setUserDetails(parsedUser);
     }
-  }, []);
+  }, [router]);
 
   if (isLoading || isFetching) {
-    return (
-      <div className='p-8'>
-        Loading
-        {/* <div className='w-full h-16 flex items-center justify-center mt-40'>
-            <LottieLoader animationData={LoadingAnimation} className='w-1/6' />
-          </div> */}
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   if (error) {
-    return <div className='px-8'>Error fetching user data. Try again</div>;
+    return (
+      <Box className='px-8' height='100vh'>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          Error fetching user data. Try again
+        </Box>
+      </Box>
+    );
   }
 
   return (
