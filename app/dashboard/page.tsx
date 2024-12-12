@@ -1,7 +1,7 @@
 "use client";
 import React, { Suspense, useEffect } from "react";
 import toast from "react-hot-toast";
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { useSearchParams, useRouter } from "next/navigation";
 
 import DashboardSkeleton from "@/components/DashboardSkeleton";
@@ -71,7 +71,7 @@ const DashboardPageContent = () => {
           mx='auto'
           alignItems='center'
           justifyContent='center'
-          width='70%'
+          width={{ xs: "80%", md: "70%" }}
           borderRadius={3}
           pb={2}
         >
@@ -88,16 +88,25 @@ const DashboardPageContent = () => {
             flexDirection='column'
             justifyContent='center'
             textAlign='center'
-            gap={4}
+            gap={2}
             borderRadius={3}
             p={4}
             mx='auto'
           >
+            <Avatar
+              alt='Travis Howard'
+              src='/avatar2.jpeg'
+              sx={{ width: 94, height: 94, mx: "auto" }}
+            />
+
             <Typography
               variant='h3'
-              gutterBottom
+              // gutterBottom
               fontWeight={700}
-              sx={{ fontFamily: "var(--font-public-sans)" }}
+              sx={{
+                fontFamily: "var(--font-public-sans)",
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+              }}
             >
               Welcome, John Doe
             </Typography>
@@ -109,13 +118,15 @@ const DashboardPageContent = () => {
             </Typography>
           </Box>
 
-          <Typography variant='subtitle1' textAlign='center' mx='auto' mb={2}>
-            Korem ipsum dolor sit amet, consectetur adipiscing elit., Korem
-            ipsum dolor sit amet, consectetur adipiscing elit., Korem ipsum
-            dolor sit amet, consectetur adipiscing elit. Korem ipsum dolor sit
-            amet, consectetur adipiscing elit.,Korem ipsum dolor sit amet,
-            consectetur adipiscing elit.
-          </Typography>
+          <Box p={2}>
+            <Typography variant='subtitle1' textAlign='center' mx='auto' mb={2}>
+              Korem ipsum dolor sit amet, consectetur adipiscing elit., Korem
+              ipsum dolor sit amet, consectetur adipiscing elit., Korem ipsum
+              dolor sit amet, consectetur adipiscing elit. Korem ipsum dolor sit
+              amet, consectetur adipiscing elit.,Korem ipsum dolor sit amet,
+              consectetur adipiscing elit.
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </Box>
