@@ -1,10 +1,9 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect } from "react";
 import toast from "react-hot-toast";
 import { Box, Typography } from "@mui/material";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
-import { User } from "@/types/types";
 import DashboardSkeleton from "@/components/DashboardSkeleton";
 import { useGetUserQuery } from "@/redux/dashboard/DashboardService";
 
@@ -13,9 +12,6 @@ const DashboardPage = () => {
   const searchParams = useSearchParams();
   const user_id = searchParams.get("user_id");
   console.log("user_id", user_id);
-
-  const [userDetails, setUserDetails] = useState<User>();
-  console.log("userDetails", userDetails);
 
   const { data, error, isLoading, isFetching } = useGetUserQuery(
     { user_id: user_id as string },
@@ -28,12 +24,6 @@ const DashboardPage = () => {
     if (!token) {
       toast.success("Kindly log in again");
       router.push("/login");
-    }
-
-    const storedUser = localStorage.getItem("frontend-interview-user");
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      setUserDetails(parsedUser);
     }
   }, [router]);
 
