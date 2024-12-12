@@ -65,8 +65,17 @@ const SignupPage = () => {
     });
   };
 
+  const isFormValid = Object.values(formValues).every((fieldValue) =>
+    fieldValue.trim()
+  );
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isFormValid) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
 
     try {
       await signup(formValues);
@@ -300,7 +309,7 @@ const SignupPage = () => {
             variant='contained'
             color='primary'
             fullWidth
-            disabled={isLoading}
+            disabled={isLoading || !isFormValid}
           >
             {isLoading ? <CircularProgress size={24} /> : "Create an account"}
           </Button>

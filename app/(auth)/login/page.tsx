@@ -163,6 +163,7 @@ const LoginPage = () => {
             color='primary'
             fullWidth
             disabled={isLoading || !formValues.email || !formValues.password}
+            sx={{ mt: 2 }}
           >
             {isLoading ? <CircularProgress size={24} /> : "Login"}
           </Button>
