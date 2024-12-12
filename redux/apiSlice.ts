@@ -19,5 +19,6 @@ export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: baseQueryWithRetry,
     tagTypes: ['Auth', 'User'],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     endpoints: builder => ({})
 })

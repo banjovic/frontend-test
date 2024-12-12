@@ -23,9 +23,7 @@ type FormValueType = {
   organization_name: string;
 };
 
-type Props = {};
-
-const SignupPage = (props: Props) => {
+const SignupPage = () => {
   const [formValues, setFormValues] = useState<FormValueType>({
     first_name: "",
     last_name: "",
@@ -121,8 +119,7 @@ const SignupPage = (props: Props) => {
             >
               <Stack gap={1} width={{ base: "100%", md: "50%" }}>
                 <Typography
-                  // variant='subtitle1'
-                  fontSize={18}
+                  variant='subtitle1'
                   sx={{ fontFamily: "var(--font-inter)" }}
                   fontWeight={500}
                 >
@@ -141,8 +138,7 @@ const SignupPage = (props: Props) => {
 
               <Stack gap={1} width={{ base: "100%", md: "50%" }}>
                 <Typography
-                  // variant='subtitle1'
-                  fontSize={18}
+                  variant='subtitle1'
                   sx={{ fontFamily: "var(--font-inter)" }}
                   fontWeight={500}
                 >
@@ -162,8 +158,7 @@ const SignupPage = (props: Props) => {
 
             <Stack gap={1}>
               <Typography
-                // variant='subtitle1'
-                fontSize={18}
+                variant='subtitle1'
                 sx={{ fontFamily: "var(--font-inter)" }}
                 fontWeight={500}
               >
@@ -182,8 +177,7 @@ const SignupPage = (props: Props) => {
 
             <Stack gap={1}>
               <Typography
-                // variant='subtitle1'
-                fontSize={18}
+                variant='subtitle1'
                 sx={{ fontFamily: "var(--font-inter)" }}
                 fontWeight={500}
               >
@@ -209,8 +203,7 @@ const SignupPage = (props: Props) => {
 
             <Stack gap={1}>
               <Typography
-                // variant='subtitle1'
-                fontSize={18}
+                variant='subtitle1'
                 sx={{ fontFamily: "var(--font-inter)" }}
                 fontWeight={500}
               >
@@ -234,8 +227,7 @@ const SignupPage = (props: Props) => {
                 alignItems='center'
               >
                 <Typography
-                  // variant='subtitle1'
-                  fontSize={18}
+                  variant='subtitle1'
                   sx={{ fontFamily: "var(--font-inter)" }}
                   fontWeight={500}
                 >
@@ -281,7 +273,7 @@ const SignupPage = (props: Props) => {
           </Box>
 
           <Button variant='contained' color='primary' fullWidth>
-          Create an account
+            Create an account
           </Button>
 
           <Typography variant='body2' textAlign='center'>

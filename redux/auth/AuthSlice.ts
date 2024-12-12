@@ -4,29 +4,36 @@ import { User } from '@/types/types'
 import { RootState } from '../store'
 
 type LoginState = {
-    user: User | null
+    data: User | null
     token: string | null
     message: string
+    success: boolean
+
 }
 
 const slice = createSlice({
     name: 'login',
-    initialState: { user: null, token: null } as LoginState,
+    initialState: {
+        data: null,
+        token: null,
+        success: false,
+        message: '',
+    } as LoginState,
     reducers: {
-        setCredentials: (
+        setUserCredentials: (
             state,
             {
-                payload: { user, token },
-            }: PayloadAction<{ user: User; token: string }>,
+                payload: { data, token },
+            }: PayloadAction<{ data: User; token: string }>,
         ) => {
-            state.user = user
+            state.data = data
             state.token = token
         },
     },
 })
 
-export const { setCredentials } = slice.actions
+export const { setUserCredentials } = slice.actions
 
 export default slice.reducer
 
-export const selectCurrentUser = (state: RootState) => state.login.user
+export const selectCurrentUser = (state: RootState) => state.login.data
