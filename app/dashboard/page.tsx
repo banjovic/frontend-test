@@ -1,23 +1,38 @@
 "use client";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Avatar, Box, Typography } from "@mui/material";
 import { useSearchParams, useRouter } from "next/navigation";
 
 import DashboardSkeleton from "@/components/DashboardSkeleton";
 import { useGetUserQuery } from "@/redux/dashboard/DashboardService";
+import { User } from "@/types/types";
 
 const DashboardPageContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const user_id = searchParams.get("user_id");
-  console.log("user_id", user_id);
 
   const { data, error, isLoading, isFetching } = useGetUserQuery(
     { user_id: user_id as string },
     { skip: !user_id }
   );
-  console.log("data", data);
+
+  const [userDetails, setUserDetails] = useState<User>({
+    id: "",
+    email: "",
+    active: false,
+    is_verified: false,
+    user_type: "",
+    created_at: "",
+    updated_at: "",
+    organization_name: "",
+    phone_number: "",
+    first_name: "",
+    last_name: "",
+    is_completed_kyc: false,
+    password: "",
+  });
 
   useEffect(() => {
     const token = localStorage.getItem("frontend-interview-token");
@@ -26,6 +41,12 @@ const DashboardPageContent = () => {
       router.push("/login");
     }
   }, [router]);
+
+  useEffect(() => {
+    if (data) {
+      setUserDetails(data.data);
+    }
+  }, [data]);
 
   if (isLoading || isFetching) {
     return <DashboardSkeleton />;
@@ -108,13 +129,14 @@ const DashboardPageContent = () => {
                 fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
               }}
             >
-              Welcome, John Doe
+              Welcome, {`${userDetails.first_name} ${userDetails.last_name}`}
             </Typography>
             <Typography
-              variant='body2'
+              variant='body1'
               sx={{ fontFamily: "var(--font-public-sans)" }}
+              className='capitalize'
             >
-              Super Admin
+              {userDetails.user_type}
             </Typography>
           </Box>
 

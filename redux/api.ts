@@ -5,12 +5,13 @@ const BaseUrl = process.env.NEXT_PUBLIC_API_URL;
 export const baseQuery = fetchBaseQuery({
     baseUrl: BaseUrl,
     prepareHeaders: (headers) => {
-        const token = localStorage.getItem("jointly-userToken");
+        const token = localStorage.getItem("frontend-interview-token");
         if (token) {
             headers.set('authorization', `Bearer ${token}`)
         }
         return headers
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     responseHandler: async (response: any) => {
         try {
             if (response.status === 401 || response.status === 403) {

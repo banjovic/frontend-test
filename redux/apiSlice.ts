@@ -4,8 +4,12 @@ const baseQuery = fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
     prepareHeaders: (headers) => {
         if (typeof window !== 'undefined') {
-            const token = localStorage.getItem("frontend-interview-token");
+            let token = localStorage.getItem("frontend-interview-token");
             if (token) {
+                try {
+                    token = JSON.parse(token);
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                } catch (e) { }
                 headers.set('authorization', `Bearer ${token}`);
             }
         }
